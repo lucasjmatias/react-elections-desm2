@@ -1,5 +1,5 @@
 const good = 'text-green-700';
-const warning = 'text-yello-700';
+const warning = 'text-yellow-700';
 const bad = 'text-red-600';
 
 const colorizeNumber = numericValue =>

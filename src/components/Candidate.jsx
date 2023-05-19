@@ -3,10 +3,7 @@ import { formatInteger, formatPercent } from '../utils/number-utils';
 import { colorizeWarning } from '../utils/style-utils';
 
 export default function Candidate({ children: candidate }) {
-  const { name, username } = candidate;
-  const votesPercentage = 0.4568;
-  const totalVotes = 749559;
-  const isElected = true;
+  const { name, username, votesPercentage, votes, isElected } = candidate;
 
   return (
     <div className="border border-gray-50 rounded-md w-64 h-56 p-4 m-2 shadow-lg flex flex-wrap box-content">
@@ -26,7 +23,7 @@ export default function Candidate({ children: candidate }) {
           </span>
         </div>
         <div className="h-12 text-center text-sm">
-          {formatInteger(totalVotes)} votos
+          {formatInteger(votes)} votos
         </div>
       </div>
       <div className="w-full h-16 relative">
@@ -35,7 +32,9 @@ export default function Candidate({ children: candidate }) {
         </span>
       </div>
       <div className="text-center w-full h-16 text-xl">
-        <span className={`inline-block p-6 ${colorizeWarning(isElected)}`}>
+        <span
+          className={`inline-block font-bold p-6 ${colorizeWarning(isElected)}`}
+        >
           {isElected ? 'Eleito' : 'Não eleito'}
         </span>
       </div>

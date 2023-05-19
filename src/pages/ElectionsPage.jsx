@@ -26,9 +26,18 @@ export default function ElectionsPage() {
   useEffect(() => {
     const candidatesByCity = election
       .filter(c => c.cityId === currCity.id)
-      .map(e => e.candidateId);
+      .map(({ candidateId, votes }) => {
+        const candidate = candidates.find(c => c.id === candidateId);
+        const votesPercentage = votes / currCity.presence;
+        return { ...candidate, votes, votesPercentage };
+      })
+      .sort((a, b) => b.votesPercentage - a.votesPercentage)
+      .map((candidate, index) => ({
+        ...candidate,
+        isElected: index === 0,
+      }));
 
-    setCityCandidates(candidates.filter(c => candidatesByCity.includes(c.id)));
+    setCityCandidates(candidatesByCity);
   }, [currCity, candidates, election]);
 
   useEffect(() => {
